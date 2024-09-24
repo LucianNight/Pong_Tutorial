@@ -92,7 +92,7 @@ class Ball:
         #If the ball goes off the screen it resets to let the
         #losing player serve
         if self.rect.left >= SCREEN_WIDTH:
-            self.pos_x = player_two.rect.left - self..radius  
+            self.pos_x = player_two.rect.left - self.radius  
             self.pos_y = player_two.rect.centery
             self.vel_x = -7 
             self.vel_y = -7
