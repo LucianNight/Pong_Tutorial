@@ -19,7 +19,10 @@ BLUE = (0,0,255)
 GREEN = (0,255,0)
 BLACK = (0,0,0)
 
+#create class for player
 class Player:
+    #define intialization module(gets called automatically when object is created
+    #only function that does not have to be called to be used)
     def __init__(self, player, pos_x, pos_y, color):
         self.player = player
         self.pos_x = pos_x
@@ -62,8 +65,10 @@ class Player:
     def draw(self, surface):
         pygame.draw.rect(surface, self.color, self.rect)
 
-
+#create class for ball
 class Ball:
+    #define intialization module(gets called automatically when object is created
+    #only function that does not have to be called to be used)
     def __init__(self, pos_x, pos_y, color):
         self.pos_x = pos_x
         self.pos_y = pos_y
