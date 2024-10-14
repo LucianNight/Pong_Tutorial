@@ -151,5 +151,6 @@ while play:
 
     #updates image for screen
     pygame.display.update()
-            
+
+#This is used to exit the program
 pygame.quit()
