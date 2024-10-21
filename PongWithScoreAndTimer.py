@@ -28,15 +28,15 @@ BLACK = (0,0,0)
 #define font
 font = pygame.font.SysFont('Futura',50)
 
-
+#A fucntion for drawing text on the screen
 def draw_text(text, font, text_col, x, y):
     img = font.render(text, True, text_col)
     screen.blit(img, (x, y))
-
-
-
-
+    
+#define the class for the player
 class Player:
+    #define intialization module(gets called automatically when object is created
+    #only function that does not have to be called to be used)
     def __init__(self, player, pos_x, pos_y, color):
         self.player = player
         self.pos_x = pos_x
@@ -77,8 +77,10 @@ class Player:
     def draw(self, surface):
         pygame.draw.rect(surface, self.color, self.rect)
 
-
+#defines class for ball
 class Ball:
+     #define intialization module(gets called automatically when object is created
+    #only function that does not have to be called to be used)
     def __init__(self, pos_x, pos_y, color):
         self.pos_x = pos_x
         self.pos_y = pos_y
@@ -94,7 +96,6 @@ class Ball:
     def move(self, player_one, player_two):
 
         intro_count = 0
-
         #if the ball hits the bottom of the screen or the top of the screen
         #it "bounces" and changes directions
         if self.rect.bottom >= SCREEN_HEIGHT:
@@ -106,8 +107,8 @@ class Ball:
         if self.rect.colliderect(player_one) or self.rect.colliderect(player_two):   
             self.vel_x *= -1
 
-        #If the ball goes off the screen it resets to let the
-        #losing player serve
+        #If the ball goes off the screen it resets variables accordingly to let the
+        #losing player 
         if self.rect.left >= SCREEN_WIDTH:
             self.pos_x = player_two.rect.left - self.radius  
             self.pos_y = player_two.rect.centery
@@ -131,6 +132,7 @@ class Ball:
         #updates the rectangle of the ball
         self.rect.center = (self.pos_x,self.pos_y)
 
+        #return the counter to restart the round
         return intro_count
 
     
@@ -155,23 +157,21 @@ while play:
     screen.fill(GREEN)
 
     pygame.draw.aaline(screen,RED,(SCREEN_WIDTH/2,0),(SCREEN_WIDTH/2,SCREEN_HEIGHT), 2)
-    #pygame.draw.rect(screen,BLACK,((SCREEN_WIDTH/2,0),(SCREEN_WIDTH/2,SCREEN_HEIGHT)))
 
-    #draw players and ball
+    #draw players, ball, and score
     player1.draw(screen)
     player2.draw(screen)
     ball.draw(screen)
     draw_text(str(score[0]) + "   " + str(score[1]), font, RED, SCREEN_WIDTH/2 - 30, 50)
 
-
+#if the counter is less than 0 the game can be played
     if intro_count <= 0:
-
         #move players and ball
         player1.move()
         player2.move()
         intro_count = ball.move(player1, player2)
         round_over = False
-
+#else we want to see it be counted down
     else:
         draw_text(str(intro_count), font, BLACK, SCREEN_WIDTH/2 - 10, SCREEN_HEIGHT/2 - 200)
         if (pygame.time.get_ticks() - last_count_update) >= 1000:
@@ -181,12 +181,15 @@ while play:
     #event handler for pygame events
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
+            #allows for exiting pygame with "Escape" key
             if event.key == pygame.K_ESCAPE:
                 play = False
+        #allows for exiting pygame with the "X" n top right of window        
         if event.type == pygame.QUIT:
             play = False
 
     #updates image for screen
     pygame.display.update()
-            
+    
+#closes pygame smoothly            
 pygame.quit()
