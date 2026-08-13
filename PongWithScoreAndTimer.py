@@ -114,7 +114,7 @@ class Ball:
             self.pos_y = player_two.rect.centery
             self.vel_x = -7 
             self.vel_y = -7
-            score[1] += 1
+            score[0] += 1
             intro_count = 3
 
         if self.rect.right <= 0:
@@ -122,7 +122,7 @@ class Ball:
             self.pos_y = player_one.rect.centery
             self.vel_x = 7
             self.vel_y = 7
-            score[0] += 1
+            score[1] += 1
             intro_count = 3
             
         #Updated the ball position x and y with the change in velocities
